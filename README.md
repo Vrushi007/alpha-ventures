@@ -42,11 +42,14 @@ A modern, responsive website for Alpha Ventures recruiting company built with HT
 ## File Structure
 
 ```
-ui/
+alpha-ventures/
 ├── index.html          # Home page
 ├── about.html          # About us page
 ├── clients.html        # Our clients page
 ├── contact.html        # Contact us page
+├── images/
+│   ├── alpha-ventures-001.jpeg  # Logo image
+│   └── alpha-ventures-002.jpeg  # Additional image
 ├── styles/
 │   └── main.css        # Main stylesheet
 └── scripts/
@@ -59,10 +62,10 @@ ui/
 ### Option 1: Simple HTTP Server (Recommended)
 
 1. Open terminal/command prompt
-2. Navigate to the `ui` directory:
+2. Navigate to the main project directory:
 
    ```bash
-   cd /path/to/alpha-ventures/ui
+   cd /path/to/alpha-ventures
    ```
 
 3. Start a simple HTTP server:
@@ -159,11 +162,11 @@ All content is static and can be easily modified by editing the HTML files:
 
 ### Images
 
-Currently using Font Awesome icons as placeholders. You can replace these with actual images by:
+The website now includes custom logo images in the `images/` folder. The logo has been integrated into both the navigation and footer sections. You can replace these with your own images by:
 
-1. Adding image files to an `images/` folder
-2. Updating the HTML to use `<img>` tags instead of icon placeholders
-3. Adding appropriate CSS styling
+1. Adding new image files to the `images/` folder
+2. Updating the HTML files to reference the new image paths
+3. Adjusting CSS styling if needed for different image dimensions
 
 ## Browser Support
 
