@@ -46,40 +46,42 @@
             <div class="contact-grid">
                 <!-- Contact Form -->
                 <div class="contact-form-section">
-                    <h2>Get in Touch</h2>
-                    <p>Fill out the form below and we'll get back to you within 24 hours.</p>
+                    <div class="form-header">
+                        <h2>Get in Touch</h2>
+                        <p>Fill out the form below and we'll get back to you within 24 hours.</p>
+                    </div>
                     
                     <form class="contact-form" id="contactForm">
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="firstName">First Name *</label>
-                                <input type="text" id="firstName" name="firstName" required>
+                                <input type="text" id="firstName" name="firstName" autocomplete="given-name" required>
                             </div>
                             <div class="form-group">
                                 <label for="lastName">Last Name *</label>
-                                <input type="text" id="lastName" name="lastName" required>
+                                <input type="text" id="lastName" name="lastName" autocomplete="family-name" required>
                             </div>
                         </div>
                         
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="email">Email *</label>
-                                <input type="email" id="email" name="email" required>
+                                <input type="email" id="email" name="email" autocomplete="email" required>
                             </div>
                             <div class="form-group">
                                 <label for="phone">Phone</label>
-                                <input type="tel" id="phone" name="phone">
+                                <input type="tel" id="phone" name="phone" autocomplete="tel">
                             </div>
                         </div>
                         
                         <div class="form-group">
                             <label for="company">Company *</label>
-                            <input type="text" id="company" name="company" required>
+                            <input type="text" id="company" name="company" autocomplete="organization" required>
                         </div>
                         
                         <div class="form-group">
                             <label for="jobTitle">Job Title</label>
-                            <input type="text" id="jobTitle" name="jobTitle">
+                            <input type="text" id="jobTitle" name="jobTitle" autocomplete="organization-title">
                         </div>
                         
                         <div class="form-group">
@@ -107,7 +109,7 @@
                         
                         <div class="form-group">
                             <label for="message">Tell us about your hiring needs *</label>
-                            <textarea id="message" name="message" rows="5" placeholder="Please describe the role(s) you're looking to fill, required skills, experience level, and any other relevant details..." required></textarea>
+                            <textarea id="message" name="message" rows="5" maxlength="1000" placeholder="Please describe the role(s) you're looking to fill, required skills, experience level, and any other relevant details..." required></textarea>
                         </div>
                         
                         <div class="form-group checkbox-group">
@@ -118,7 +120,11 @@
                             </label>
                         </div>
                         
-                        <button type="submit" class="btn btn-primary">Send Message</button>
+                        <button type="submit" class="btn btn-primary" aria-describedby="submit-help">
+                            <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                            Send Message
+                        </button>
+                        <small id="submit-help" class="form-help-text">We'll respond within 24 hours</small>
                     </form>
                     
                     <div class="form-success" id="formSuccess" style="display: none;">

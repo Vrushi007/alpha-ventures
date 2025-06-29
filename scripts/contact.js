@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const originalText = submitButton.textContent;
       submitButton.textContent = "Sending...";
       submitButton.disabled = true;
+      contactForm.classList.add("loading");
 
       // Collect form data
       const formData = new FormData(contactForm);
@@ -46,6 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("Contact form submitted:", data);
 
         // Reset button state
+        contactForm.classList.remove("loading");
         submitButton.textContent = originalText;
         submitButton.disabled = false;
       }, 1500);
@@ -126,6 +128,54 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
+// Mobile-friendly notification system
+function showNotification(message, type = "success") {
+  // Remove existing notifications
+  const existingNotifications = document.querySelectorAll(
+    ".mobile-notification"
+  );
+  existingNotifications.forEach((notification) => notification.remove());
+
+  const notification = document.createElement("div");
+  notification.className = `mobile-notification mobile-notification-${type}`;
+  notification.style.cssText = `
+    position: fixed;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: ${type === "error" ? "#f56565" : "#48bb78"};
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    z-index: 10000;
+    max-width: 90%;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  `;
+
+  notification.textContent = message;
+  document.body.appendChild(notification);
+
+  // Trigger animation
+  setTimeout(() => {
+    notification.style.opacity = "1";
+  }, 100);
+
+  // Remove after delay
+  setTimeout(() => {
+    notification.style.opacity = "0";
+    setTimeout(() => {
+      if (notification.parentNode) {
+        notification.parentNode.removeChild(notification);
+      }
+    }, 300);
+  }, 4000);
+}
+
 // Individual field validation
 function validateField(field) {
   let isValid = true;
@@ -156,6 +206,37 @@ function validateField(field) {
 
   if (isValid) {
     field.style.borderColor = "#e1e5e9";
+  }
+
+  return isValid;
+}
+
+// Enhanced form validation with better mobile feedback
+function validateForm(form) {
+  const requiredFields = form.querySelectorAll("[required]");
+  let isValid = true;
+  let firstInvalidField = null;
+
+  requiredFields.forEach((field) => {
+    if (!validateField(field)) {
+      isValid = false;
+      if (!firstInvalidField) {
+        firstInvalidField = field;
+      }
+    }
+  });
+
+  // Scroll to first invalid field on mobile
+  if (!isValid && firstInvalidField) {
+    firstInvalidField.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
+
+    // Focus the field after scrolling
+    setTimeout(() => {
+      firstInvalidField.focus();
+    }, 500);
   }
 
   return isValid;

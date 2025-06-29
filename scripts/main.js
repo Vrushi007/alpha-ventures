@@ -7,6 +7,18 @@ document.addEventListener("DOMContentLoaded", function () {
     hamburger.addEventListener("click", function () {
       navMenu.classList.toggle("active");
       hamburger.classList.toggle("active");
+
+      // Animate hamburger bars
+      const bars = hamburger.querySelectorAll(".bar");
+      if (hamburger.classList.contains("active")) {
+        bars[0].style.transform = "rotate(-45deg) translate(-5px, 6px)";
+        bars[1].style.opacity = "0";
+        bars[2].style.transform = "rotate(45deg) translate(-5px, -6px)";
+      } else {
+        bars[0].style.transform = "none";
+        bars[1].style.opacity = "1";
+        bars[2].style.transform = "none";
+      }
     });
 
     // Close menu when clicking on a link
@@ -15,7 +27,44 @@ document.addEventListener("DOMContentLoaded", function () {
       link.addEventListener("click", () => {
         navMenu.classList.remove("active");
         hamburger.classList.remove("active");
+
+        // Reset hamburger bars
+        const bars = hamburger.querySelectorAll(".bar");
+        bars[0].style.transform = "none";
+        bars[1].style.opacity = "1";
+        bars[2].style.transform = "none";
       });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener("click", function (event) {
+      const isClickInsideNav =
+        navMenu.contains(event.target) || hamburger.contains(event.target);
+
+      if (!isClickInsideNav && navMenu.classList.contains("active")) {
+        navMenu.classList.remove("active");
+        hamburger.classList.remove("active");
+
+        // Reset hamburger bars
+        const bars = hamburger.querySelectorAll(".bar");
+        bars[0].style.transform = "none";
+        bars[1].style.opacity = "1";
+        bars[2].style.transform = "none";
+      }
+    });
+
+    // Close menu on window resize
+    window.addEventListener("resize", function () {
+      if (window.innerWidth > 768 && navMenu.classList.contains("active")) {
+        navMenu.classList.remove("active");
+        hamburger.classList.remove("active");
+
+        // Reset hamburger bars
+        const bars = hamburger.querySelectorAll(".bar");
+        bars[0].style.transform = "none";
+        bars[1].style.opacity = "1";
+        bars[2].style.transform = "none";
+      }
     });
   }
 
